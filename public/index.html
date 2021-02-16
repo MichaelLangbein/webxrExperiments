@@ -2,39 +2,46 @@
   <head>
     <style>
 
-      .all {
+      .uiContainer {
         display: flex;
         flex-direction: row;
         align-items: stretch;
       }
 
-      .menu {
+      .leftMenu {
         background-color: burlywood;
         flex-grow: 1;
       }
 
-      .canvasContainer {
-        background-color: blue;
+      .transparentCenter {
+        opacity: 0.0;
         flex-grow: 3;
+      }
+
+      .rightMenu {
+        background-color: cadetblue;
+        flex-grow: 1;
       }
 
     </style>
   </head>
   <body>
     <h2>Demo app</h2>
-    <div id="all" class="all">
-      <div id="menu" class="menu">
+    <div id="uiContainer" class="uiContainer">
+      <div id="leftMenu" class="leftMenu">
         <ul>
           <li>
-            Some list item
+            <button id="button1">Some list item</button>
           </li>
           <li>
-            Another list item
+            <button id="button2">Another list item</button>
           </li>
         </ul>
       </div>
-      <div id="canvasContainer" class="canvasContainer">
-    </div>
+      <div id="transparentCenter" class="transparentCenter"></div>
+      <div id="rightMenu" class="rightMenu">
+        <p>Text</p>
+      </div>
     </div>
   </body>
   <script src="./bundle.js"></script>

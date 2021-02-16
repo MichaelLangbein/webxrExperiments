@@ -4,11 +4,10 @@ import { ARButton } from 'three/examples/jsm/webxr/ARButton';
 
 
 
-const container = document.getElementById('canvasContainer') as HTMLDivElement;
-container.addEventListener('resize', () => {
-    camera.aspect = container.clientWidth / container.clientHeight;
+window.addEventListener('resize', () => {
+    camera.aspect = window.innerWidth / window.innerHeight;
     camera.updateProjectionMatrix();
-    renderer.setSize(container.clientWidth, container.clientHeight);
+    renderer.setSize(window.innerWidth, window.innerHeight);
 });
 
 
@@ -18,9 +17,9 @@ const camera = new PerspectiveCamera(70, window.innerWidth / window.innerHeight,
 
 const renderer = new WebGLRenderer({ antialias: true, alpha: true });
 renderer.setPixelRatio(window.devicePixelRatio);
-renderer.setSize(container.clientWidth, container.clientHeight);
+renderer.setSize(window.innerWidth, window.innerHeight);
 renderer.xr.enabled = true;
-container.appendChild(renderer.domElement);
+document.body.appendChild(renderer.domElement);
 
 document.body.appendChild(ARButton.createButton(renderer, {
 	optionalFeatures: [ 'dom-overlay', 'dom-overlay-for-handheld-ar' ],
@@ -48,10 +47,20 @@ scene.add(controller);
 
 
 
-
-
-
 renderer.setAnimationLoop((timestamp: number, frame: XRFrame | undefined) => {
     renderer.render(scene, camera);
 });
 
+
+const uiContainer = document.getElementById('uiContainer') as HTMLDivElement;
+const rightMenu = document.getElementById('rightMenu') as HTMLDivElement;
+const button1 = document.getElementById('button1') as HTMLButtonElement;
+button1.addEventListener('click', (evt) => {
+    rightMenu.innerHTML = '<p>Button 1 clicked!</p>';
+    evt.stopPropagation();
+});
+const button2 = document.getElementById('button2') as HTMLButtonElement;
+button2.addEventListener('click', (evt) => {
+    rightMenu.innerHTML = '<p>Button 2 clicked!</p>';
+    evt.stopPropagation();
+});
