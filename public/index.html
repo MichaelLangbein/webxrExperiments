@@ -1,23 +1,40 @@
 <html>
   <head>
     <style>
-      .canvasContainer {
-        width: 100%;
-        height: 100%;
-        background-color: aqua;
+
+      .all {
+        display: flex;
+        flex-direction: row;
+        align-items: stretch;
       }
 
-      .gameCanvas {
-        width: 100%;
-        height: 800px;
-        background-color: blue;
+      .menu {
+        background-color: burlywood;
+        flex-grow: 1;
       }
+
+      .canvasContainer {
+        background-color: blue;
+        flex-grow: 3;
+      }
+
     </style>
   </head>
   <body>
     <h2>Demo app</h2>
-    <div id="canvasContainer" class="canvasContainer">
-      <canvas id="gameCanvas" class="gameCanvas"></canvas>
+    <div id="all" class="all">
+      <div id="menu" class="menu">
+        <ul>
+          <li>
+            Some list item
+          </li>
+          <li>
+            Another list item
+          </li>
+        </ul>
+      </div>
+      <div id="canvasContainer" class="canvasContainer">
+    </div>
     </div>
   </body>
   <script src="./bundle.js"></script>
