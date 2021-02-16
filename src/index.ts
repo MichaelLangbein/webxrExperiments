@@ -17,24 +17,31 @@ import { ARButton } from 'three/examples/jsm/webxr/ARButton.js';
 
 
 const canvasContainer = document.getElementById('canvasContainer') as HTMLDivElement;
-const gameCanvas = document.getElementById('gameCanvas') as HTMLCanvasElement;
+const gameCanvas = window;
+gameCanvas.addEventListener('resize', () => {
+    camera.aspect = gameCanvas.innerWidth / gameCanvas.innerHeight;
+    camera.updateProjectionMatrix();
+    renderer.setSize(gameCanvas.innerWidth, gameCanvas.innerHeight);
+});
+
 
 const renderer = new WebGLRenderer({
-    canvas: gameCanvas,
     antialias: true,
     alpha: true
 });
+renderer.setPixelRatio(window.devicePixelRatio);
+renderer.setSize(gameCanvas.innerWidth, gameCanvas.innerHeight);
 renderer.xr.enabled = true;
-canvasContainer.appendChild(ARButton.createButton(renderer, {
+canvasContainer.appendChild(renderer.domElement);
+document.body.appendChild(ARButton.createButton(renderer, {
     optionalFeatures: [ 'dom-overlay', 'dom-overlay-for-handheld-ar' ],
 	domOverlay: { root: document.body }
 }));
 
 const scene = new Scene();
 
-const camera = new PerspectiveCamera();
-camera.position.z = 5;
-camera.position.y = 3;
+const camera = new PerspectiveCamera(50, 3/2, 0.01, 100);
+camera.position.set(0, 1.6, 0);
 camera.lookAt(0, 0, 0);
 
 const cube = new Mesh(
@@ -43,6 +50,7 @@ const cube = new Mesh(
         color: 'red'
     })
 );
+cube.position.set(0, 1.6, -2);
 scene.add(cube);
 
 

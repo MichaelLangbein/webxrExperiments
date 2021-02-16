@@ -4,7 +4,10 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "serve": "webpack-dev-server"
+    "serve": "webpack-dev-server",
+    "build": "npx webpack",
+    "deploy": "cp public/* /var/www/webxr/html/",
+    "buildAndDeploy": "npm run build && npm run deploy"
   },
   "repository": {
     "type": "git",
